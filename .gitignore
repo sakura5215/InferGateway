@@ -1,0 +1,21 @@
+.idea
+.vscode
+upload
+*.exe
+*.db
+build
+*.db-journal
+logs
+data
+/web/node_modules
+cmd.md
+.env
+/one-api
+temp
+.DS_Store
+
+# InferGateway 本地调试产物
+cookie.txt
+go.mod.bak
+*.tar
+node_modules/
