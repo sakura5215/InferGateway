@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package infergateway;
+
+option go_package = "github.com/sakura5215/InferGateway/proto";
+
+// InferGatewayService 暴露给内部微服务的 gRPC 接口。
+// 复用 one-api 的 relay/adaptor 转发逻辑，仅入口协议从 HTTP 换成 gRPC。
+service InferGatewayService {
+  // 同步聊天补全，返回完整 JSON 响应。
+  rpc ChatCompletion(ChatRequest) returns (ChatResponse) {}
+
+  // 流式聊天补全，按 SSE chunk 逐块返回。
+  rpc ChatCompletionStream(ChatRequest) returns (stream ChatChunk) {}
+
+  // 列出当前网关管理的推理渠道及其健康状态。
+  rpc ListChannels(ListChannelsRequest) returns (ListChannelsResponse) {}
+}
+
+message ChatRequest {
+  // one-api 令牌，复用存量鉴权（model.Token 校验）。
+  string token = 1;
+  // 模型名，如 "qwen2.5-1.5b"。
+  string model = 2;
+  // OpenAI messages 数组的 JSON 字符串，原样透传给 adaptor。
+  string messages = 3;
+  float temperature = 4;
+  int32 max_tokens = 5;
+  bool stream = 6;
+}
+
+message ChatResponse {
+  int32 code = 1;     // 0 成功，非 0 失败
+  string message = 2; // 失败时的错误信息
+  string data = 3;    // 成功时为完整 OpenAI 响应 JSON
+}
+
+message ChatChunk {
+  string data = 1; // 单个 SSE chunk 的 data 字段
+}
+
+message ListChannelsRequest {}
+
+message ListChannelsResponse {
+  repeated ChannelInfo channels = 1;
+}
+
+message ChannelInfo {
+  int32 id = 1;
+  string name = 2;
+  string type = 3;
+  bool healthy = 4;
+}
