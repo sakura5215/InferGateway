@@ -2,7 +2,7 @@
 // 调用 ListChannels 查看实例健康状态，调用 ChatCompletion 验证推理转发。
 //
 // 启动：
-//   go run ./cmd/grpcclient -addr localhost:50051 -token <your-one-api-token>
+//   go run ./cmd/grpcclient -addr localhost:50051 -token <your-InferGateway-token>
 package main
 
 import (
@@ -18,7 +18,7 @@ import (
 
 func main() {
 	addr := flag.String("addr", "localhost:50051", "gRPC server address")
-	token := flag.String("token", "", "one-api token (留空则跳过 ChatCompletion)")
+	token := flag.String("token", "", "InferGateway token (留空则跳过 ChatCompletion)")
 	model := flag.String("model", "qwen2.5-1.5b-instruct", "model name")
 	prompt := flag.String("prompt", "你好，简单介绍下你自己", "user prompt")
 	flag.Parse()

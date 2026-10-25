@@ -152,7 +152,7 @@ func getLineInfo() (string, string) {
 		file = "unknown"
 		line = 0
 	}
-	parts := strings.Split(file, "one-api/")
+	parts := strings.Split(file, "InferGateway/")
 	if len(parts) > 1 {
 		file = parts[1]
 	}

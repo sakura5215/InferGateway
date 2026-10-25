@@ -25,7 +25,7 @@ package middleware
 //
 // 注意（InferGateway 增量视角）：
 //   InferGateway 编排层（infergateway/orchestrator.go）是另一套独立的"选实例"逻辑，
-//   不走这里。Distribute 是 one-api 存量的"选 channel"逻辑（用于 OpenAI/Claude 渠道）。
+//   不走这里。Distribute 是存量的"选 channel"逻辑（用于 OpenAI/Claude 渠道）。
 //   两者并行：渠道分发选 channel，编排层选 vLLM 实例。
 //   grpc/server.go 在调 RelayTextHelper 前需要手动构造 ctxkey.Channel 等，
 //   绕过 Distribute 这一步（因为 gRPC handler 是 mock gin.Context）。

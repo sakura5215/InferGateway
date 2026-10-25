@@ -1,11 +1,11 @@
 // Package grpc 实现 InferGateway 的 gRPC 接口层（增量模块 #1）。
 //
-// 设计要点：gRPC 入口复用 one-api 的 relay/adaptor 转发链。
+// 设计要点：gRPC 入口复用 relay/adaptor 转发链。
 // 通过构造 mock *gin.Context（用 httptest.NewRecorder 作 Writer），
 // 让 RelayTextHelper 以为是一次正常 HTTP 请求，
 // 从而零修改复用鉴权、adaptor 转发、计费全流程。
 //
-// 选实例不走 one-api 的 Distribute，而是走本项目的推理编排层 LB，
+// 选实例不走 Distribute，而是走本项目的推理编排层 LB，
 // 这样推理服务的健康检查和故障切换独立于渠道分发，是核心增量。
 package grpc
 
@@ -61,7 +61,7 @@ func StartServer(addr string) {
 // 构造临时 channel(base_url=实例URL) + mock gin.Context → 调 RelayTextHelper →
 // 失败(5xx/超时)则 Failover 切下一个实例重试。
 func (s *Server) ChatCompletion(ctx context.Context, req *pb.ChatRequest) (*pb.ChatResponse, error) {
-	// 1. 鉴权：复用 one-api 的 token 校验
+	// 1. 鉴权：复用 token 校验
 	//    客户端可能带 sk- 前缀（OpenAI 惯例），ValidateUserToken 期望纯 key，需去掉前缀
 	tokenKey := strings.TrimPrefix(req.Token, "sk-")
 	token, err := dbmodel.ValidateUserToken(tokenKey)
@@ -90,7 +90,7 @@ func (s *Server) ChatCompletion(ctx context.Context, req *pb.ChatRequest) (*pb.C
 	}
 
 	// 4. 推理编排层：选实例 + failover 重试
-	//    不走 one-api 的 Distribute（按 group 选 channel），而是走编排层 LB 选 vLLM 实例。
+	//    不走 Distribute（按 group 选 channel），而是走编排层 LB 选 vLLM 实例。
 	//    这样推理服务的健康检查和故障切换独立于渠道分发，是本项目核心增量。
 	maxRetries := 3
 	var bizErr *relaymodel.ErrorWithStatusCode

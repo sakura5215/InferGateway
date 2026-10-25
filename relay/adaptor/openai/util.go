@@ -13,7 +13,7 @@ func ErrorWrapper(err error, code string, statusCode int) *model.ErrorWithStatus
 
 	Error := model.Error{
 		Message: err.Error(),
-		Type:    "one_api_error",
+		Type:    "infergateway_error",
 		Code:    code,
 	}
 	return &model.ErrorWithStatusCode{

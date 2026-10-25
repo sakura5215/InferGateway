@@ -29,7 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // InferGatewayService 暴露给内部微服务的 gRPC 接口。
-// 复用 one-api 的 relay/adaptor 转发逻辑，仅入口协议从 HTTP 换成 gRPC。
+// 复用 relay/adaptor 转发逻辑，仅入口协议从 HTTP 换成 gRPC。
 type InferGatewayServiceClient interface {
 	// 同步聊天补全，返回完整 JSON 响应。
 	ChatCompletion(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
@@ -91,7 +91,7 @@ func (c *inferGatewayServiceClient) ListChannels(ctx context.Context, in *ListCh
 // for forward compatibility.
 //
 // InferGatewayService 暴露给内部微服务的 gRPC 接口。
-// 复用 one-api 的 relay/adaptor 转发逻辑，仅入口协议从 HTTP 换成 gRPC。
+// 复用 relay/adaptor 转发逻辑，仅入口协议从 HTTP 换成 gRPC。
 type InferGatewayServiceServer interface {
 	// 同步聊天补全，返回完整 JSON 响应。
 	ChatCompletion(context.Context, *ChatRequest) (*ChatResponse, error)

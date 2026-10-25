@@ -23,10 +23,10 @@ package router
 //   /v1/audio/translations    — Whisper 翻译
 //   /v1/audio/speech         — TTS 语音合成
 //   /v1/moderations          — 内容审核
-//   /v1/oneapi/proxy/:id/*   — one-api 私有代理接口（直连指定 channel，跳过 Distribute）
+//   /v1/oneapi/proxy/:id/*   — 私有代理接口（直连指定 channel，跳过 Distribute）
 //
 //   /v1/files /v1/fine_tuning /v1/assistants /v1/threads — 注册但都返 RelayNotImplemented
-//   这些是 OpenAI 后续推的 Assistant API，one-api 不实现，留着兼容客户端调用路径
+//   这些是 OpenAI 后续推的 Assistant API，不实现，留着兼容客户端调用路径
 //
 // 全局 middleware（router.Use）：
 //   - CORS                    — 允许跨域（前端独立部署在 CDN 时必需）
@@ -59,7 +59,7 @@ func SetRelayRouter(router *gin.Engine) {
 	relayV1Router.Use(middleware.RelayPanicRecover(), middleware.TokenAuth(), middleware.Distribute())
 	{
 		// ★ 核心 LLM 推理接口（生产 99% 流量走这里）
-		relayV1Router.Any("/oneapi/proxy/:channelid/*target", controller.Relay) // one-api 私有代理：跳过渠道分发，直连指定 channel
+		relayV1Router.Any("/oneapi/proxy/:channelid/*target", controller.Relay) // 私有代理：跳过渠道分发，直连指定 channel
 		relayV1Router.POST("/completions", controller.Relay)                     // 老 completion API（保留兼容）
 		relayV1Router.POST("/chat/completions", controller.Relay)                // ★ ChatCompletion — 主入口，InferGateway gRPC 层也复用这条链路
 		relayV1Router.POST("/edits", controller.Relay)                           // OpenAI edits API（gpt-3.5 文本编辑）
@@ -71,7 +71,7 @@ func SetRelayRouter(router *gin.Engine) {
 		relayV1Router.POST("/audio/transcriptions", controller.Relay)           // Whisper 语音转文字
 		relayV1Router.POST("/audio/translations", controller.Relay)             // Whisper 翻译
 		relayV1Router.POST("/audio/speech", controller.Relay)                    // TTS 语音合成
-		// 以下都是 OpenAI 后续推的 API，one-api 注册路由但不实现（返 501）
+		// 以下都是 OpenAI 后续推的 API，注册路由但不实现（返 501）
 		relayV1Router.GET("/files", controller.RelayNotImplemented)
 		relayV1Router.POST("/files", controller.RelayNotImplemented)
 		relayV1Router.DELETE("/files/:id", controller.RelayNotImplemented)

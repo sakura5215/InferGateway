@@ -17,7 +17,7 @@ package relay
 //   海外：Anthropic(Claude)/Gemini(Google)/PaLM(老 Google AI)/VertexAI(GCP)
 //   自建：Ollama(本地)
 //   特殊：AIProxyLibrary(proxy pool)/Cohere/Replicate/DeepL/Coze/Cloudflare/AWS Claude
-//   代理：proxy.Adaptor（one-api 私有 /oneapi/proxy 走原始路径转发）
+//   代理：proxy.Adaptor（私有 /oneapi/proxy 走原始路径转发）
 //
 // vLLM 在 InferGateway 里：
 //   vLLM 启动时 --served-model-name qwen3-4b-instruct，

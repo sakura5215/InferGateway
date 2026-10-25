@@ -23,7 +23,7 @@ const (
 
 type ChatRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// one-api 令牌，复用存量鉴权（model.Token 校验）。
+	// 令牌，复用存量鉴权（model.Token 校验）。
 	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	// 模型名，如 "qwen2.5-1.5b"。
 	Model string `protobuf:"bytes,2,opt,name=model,proto3" json:"model,omitempty"`

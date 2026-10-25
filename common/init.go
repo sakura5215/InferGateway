@@ -18,10 +18,10 @@ var (
 )
 
 func printHelp() {
-	fmt.Println("One API " + Version + " - All in one API service for OpenAI API.")
+	fmt.Println("InferGateway " + Version + " - All in one API service for OpenAI API.")
 	fmt.Println("Copyright (C) 2023 JustSong. All rights reserved.")
 	fmt.Println("GitHub: https://github.com/sakura5215/InferGateway")
-	fmt.Println("Usage: one-api [--port <port>] [--log-dir <log directory>] [--version] [--help]")
+	fmt.Println("Usage: InferGateway [--port <port>] [--log-dir <log directory>] [--version] [--help]")
 }
 
 func Init() {
