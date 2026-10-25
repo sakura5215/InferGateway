@@ -38,8 +38,9 @@ import (
 	"github.com/sakura5215/InferGateway/router"
 )
 
-// go:embed web/build/* — 把前端构建产物编译进二进制（启动不需要外部静态目录）
-// 注意：上面这行是 Go 编译指令，不能加 // 前缀变成普通注释，否则 pattern 会失效
+//go:embed web/build/*
+// 把前端构建产物编译进二进制（启动不需要外部静态目录）
+// 注意：上面这行是 Go 编译指令，行尾不能有任何字符，否则会被当成 pattern
 var buildFS embed.FS
 
 // main 程序入口，详见文件头注释

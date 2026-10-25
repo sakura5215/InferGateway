@@ -19,8 +19,8 @@ const Footer = () => {
               {siteInfo.system_name} {process.env.REACT_APP_VERSION}{' '}
             </Link>
             由{' '}
-            <Link href="https://github.com/songquanpeng" target="_blank">
-              JustSong
+            <Link href="https://github.com/sakura5215" target="_blank">
+              sakura5215
             </Link>{' '}
             构建，主题 berry 来自{' '}
             <Link href="https://github.com/MartialBE" target="_blank">

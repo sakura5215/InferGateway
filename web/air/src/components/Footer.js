@@ -44,8 +44,8 @@ const Footer = () => {
               {systemName} {process.env.REACT_APP_VERSION}{' '}
             </a>
             由{' '}
-            <a href='https://github.com/songquanpeng' target='_blank'>
-              JustSong
+            <a href='https://github.com/sakura5215' target='_blank'>
+              sakura5215
             </a>{' '}
             构建，主题 air 来自{' '}
             <a href='https://github.com/Calcium-Ion' target='_blank'>

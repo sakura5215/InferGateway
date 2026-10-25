@@ -5,7 +5,7 @@ package infergateway;
 option go_package = "github.com/sakura5215/InferGateway/proto";
 
 // InferGatewayService 暴露给内部微服务的 gRPC 接口。
-// 复用 one-api 的 relay/adaptor 转发逻辑，仅入口协议从 HTTP 换成 gRPC。
+// 复用 relay/adaptor 转发逻辑，仅入口协议从 HTTP 换成 gRPC。
 service InferGatewayService {
   // 同步聊天补全，返回完整 JSON 响应。
   rpc ChatCompletion(ChatRequest) returns (ChatResponse) {}
@@ -18,7 +18,7 @@ service InferGatewayService {
 }
 
 message ChatRequest {
-  // one-api 令牌，复用存量鉴权（model.Token 校验）。
+  // 令牌，复用存量鉴权（model.Token 校验）。
   string token = 1;
   // 模型名，如 "qwen2.5-1.5b"。
   string model = 2;

@@ -42,7 +42,7 @@ const Footer = () => {
               {systemName} {process.env.REACT_APP_VERSION}{' '}
             </a>
             {t('footer.built_by')}{' '}
-            <a href='https://github.com/songquanpeng' target='_blank'>
+            <a href='https://github.com/sakura5215' target='_blank'>
               {t('footer.built_by_name')}
             </a>{' '}
             {t('footer.license')}{' '}
