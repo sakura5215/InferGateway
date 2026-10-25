@@ -12,6 +12,20 @@
 - **管理后台**：Web UI 管理渠道、令牌、用户、日志、系统配置
 - **MySQL 持久化 + Redis 缓存**：渠道配置内存缓存定时同步，用户余额 Redis 实时读写
 
+## 界面预览
+
+**系统状态**（名称 / 版本 / 源码仓库 / 运行配置）：
+
+![home](docs/screenshots/home.png)
+
+**渠道管理**（多厂商渠道配置：阿里云百炼 + 自建 vLLM）：
+
+![channels](docs/screenshots/channels.png)
+
+**调用日志**（真实调用记录：模型 / 提示词消耗 / 补全消耗 / 倍率 / 耗时）：
+
+![logs](docs/screenshots/logs.png)
+
 ## 架构
 
 ```
